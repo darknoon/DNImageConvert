@@ -18,6 +18,7 @@
 		4910A29F14412ED00088CD7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4910A28614412ED00088CD7E /* Foundation.framework */; };
 		4910A2A714412ED00088CD7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4910A2A514412ED00088CD7E /* InfoPlist.strings */; };
 		4910A2AA14412ED00088CD7E /* ImageConvertTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4910A2A914412ED00088CD7E /* ImageConvertTests.m */; };
+		4910A2B414412F260088CD7E /* DNImageConvert.c in Sources */ = {isa = PBXBuildFile; fileRef = 4910A2B314412F260088CD7E /* DNImageConvert.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,18 +36,22 @@
 		4910A28414412ED00088CD7E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4910A28614412ED00088CD7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4910A28814412ED00088CD7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4910A28C14412ED00088CD7E /* ImageConvert-Info.plist */ = {isa = PBXFileReference; path = "ImageConvert-Info.plist"; sourceTree = "<group>"; };
+		4910A28C14412ED00088CD7E /* ImageConvert-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageConvert-Info.plist"; sourceTree = "<group>"; };
 		4910A28E14412ED00088CD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4910A29014412ED00088CD7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4910A29214412ED00088CD7E /* ImageConvert-Prefix.pch */ = {isa = PBXFileReference; path = "ImageConvert-Prefix.pch"; sourceTree = "<group>"; };
-		4910A29314412ED00088CD7E /* ImageConvertAppDelegate.h */ = {isa = PBXFileReference; path = ImageConvertAppDelegate.h; sourceTree = "<group>"; };
+		4910A29214412ED00088CD7E /* ImageConvert-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImageConvert-Prefix.pch"; sourceTree = "<group>"; };
+		4910A29314412ED00088CD7E /* ImageConvertAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageConvertAppDelegate.h; sourceTree = "<group>"; };
 		4910A29414412ED00088CD7E /* ImageConvertAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageConvertAppDelegate.m; sourceTree = "<group>"; };
 		4910A29B14412ED00088CD7E /* ImageConvertTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageConvertTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4910A29C14412ED00088CD7E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		4910A2A414412ED00088CD7E /* ImageConvertTests-Info.plist */ = {isa = PBXFileReference; path = "ImageConvertTests-Info.plist"; sourceTree = "<group>"; };
+		4910A2A414412ED00088CD7E /* ImageConvertTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageConvertTests-Info.plist"; sourceTree = "<group>"; };
 		4910A2A614412ED00088CD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4910A2A814412ED00088CD7E /* ImageConvertTests.h */ = {isa = PBXFileReference; path = ImageConvertTests.h; sourceTree = "<group>"; };
+		4910A2A814412ED00088CD7E /* ImageConvertTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageConvertTests.h; sourceTree = "<group>"; };
 		4910A2A914412ED00088CD7E /* ImageConvertTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageConvertTests.m; sourceTree = "<group>"; };
+		4910A2B314412F260088CD7E /* DNImageConvert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DNImageConvert.c; sourceTree = "<group>"; };
+		4910A2B514412F620088CD7E /* DNImageConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNImageConvert.h; sourceTree = "<group>"; };
+		491A99AC144160A100825247 /* DNTimingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNTimingMacros.h; sourceTree = "<group>"; };
+		491A99AE1441617A00825247 /* notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +111,12 @@
 		4910A28A14412ED00088CD7E /* ImageConvert */ = {
 			isa = PBXGroup;
 			children = (
+				491A99AE1441617A00825247 /* notes.txt */,
 				4910A29314412ED00088CD7E /* ImageConvertAppDelegate.h */,
 				4910A29414412ED00088CD7E /* ImageConvertAppDelegate.m */,
+				4910A2B514412F620088CD7E /* DNImageConvert.h */,
+				4910A2B314412F260088CD7E /* DNImageConvert.c */,
+				491A99AC144160A100825247 /* DNTimingMacros.h */,
 				4910A28B14412ED00088CD7E /* Supporting Files */,
 			);
 			path = ImageConvert;
@@ -251,6 +260,7 @@
 			files = (
 				4910A29114412ED00088CD7E /* main.m in Sources */,
 				4910A29514412ED00088CD7E /* ImageConvertAppDelegate.m in Sources */,
+				4910A2B414412F260088CD7E /* DNImageConvert.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +424,7 @@
 				4910A2AF14412ED00088CD7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4910A2B014412ED00088CD7E /* Build configuration list for PBXNativeTarget "ImageConvertTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +433,7 @@
 				4910A2B214412ED00088CD7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

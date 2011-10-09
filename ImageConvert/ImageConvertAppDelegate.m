@@ -8,6 +8,10 @@
 
 #import "ImageConvertAppDelegate.h"
 
+#import "DNImageConvert.h"
+
+#import "DNTimingMacros.h"
+
 @implementation ImageConvertAppDelegate
 
 @synthesize window = _window;
@@ -18,6 +22,32 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+	
+	//just use the fn
+	
+	unsigned char src[4] = {123, 45, 6, 75};
+	
+	unsigned int pixelCount = 1000003;
+	unsigned char *srcBuffer = malloc(pixelCount * 4);
+	
+	for (int i=0; i<pixelCount; i++) {
+		memcpy(&srcBuffer[4 * i], src, 4);
+	}
+	
+	unsigned short *dstBuffer = malloc(pixelCount * 2);
+	
+	DNTimerDefine(time);
+	for (int i=0; i<1000; i++) {
+		DNTimerStart(time);
+		DNConvert_ARGB8888toRGB565(srcBuffer, pixelCount * 4, dstBuffer);
+		DNTimerEnd(time);
+	}
+	
+	NSLog(@"timing : %@", DNTimerGetStringMS(time));
+	
+	free(srcBuffer);
+	free(dstBuffer);
+	
     return YES;
 }
 
