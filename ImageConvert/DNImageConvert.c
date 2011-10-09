@@ -8,7 +8,7 @@
 
 #include "DNImageConvert.h"
 
-#define USE_NEON_IMPL 1
+#define USE_NEON_IMPL 0
 
 #if defined(__ARM_NEON__)
 #include <arm_neon.h>
@@ -26,58 +26,39 @@ bool DNConvert_ARGB8888toRGB565(void *src, size_t srcBufferSize, void *dst)
 	
 #if defined(__ARM_NEON__) && USE_NEON_IMPL
 	int i;
-	const int pixelsPerLoop = 4;
-	for(i = 0; i < pixelCount; i += 4, inPixel32 += pixelsPerLoop, outPixel16 += pixelsPerLoop) {
-#if 1
-		//First implementation without special reads...
+	const int pixelsPerLoop = 8;
+	for(i = 0; i < pixelCount; i += pixelsPerLoop, inPixel32 += pixelsPerLoop, outPixel16 += pixelsPerLoop) {
+		//Read all r,g,b pixels into 3 registers
+		uint8x8x4_t rgba  = vld4_u8(inPixel32);
+		//Right-shift r,g,b as appropriate
+		uint8x8_t r = vshr_n_u8(rgba.val[0], 3);
+		uint8x8_t g = vshr_n_u8(rgba.val[1], 2);
+		uint8x8_t b = vshr_n_u8(rgba.val[2], 3);
 		
-		//Do 256 bits at a time on NEON aka four pixels
-		uint32x4_t p = vld1q_u32(inPixel32);
-		
-		//Create a constant vector of 0xFF
-		uint32x4_t lastByte = vdupq_n_u32(0xFF);
-		
-		//Select r
-		uint32x4_t r = vandq_u32(p, lastByte);
-		
-		//Select g
-		uint32x4_t g = vshrq_n_u32(p, 8);
-		g = vandq_u32(g, lastByte);
-		
-		//Select b
-		uint32x4_t b = vshrq_n_u32(p, 16);
-		b = vandq_u32(b, lastByte);
-		
-		//Accumulate r, g
-		//r = r >> 3 ie convert to 5-bit int
-		r = vshrq_n_u32(r, 3);
-		//r = (r >> 3) << 11 ie setup place in output int
-		r = vshlq_n_u32(r, 11);
-		
-		//g = g >> 2 ie convert to 6-bit int
-		g = vshrq_n_u32(g, 2);
-		//g = (r >> 2) << 5 ie setup place in output int
-		g = vshlq_n_u32(g, 5);
-		
-		// rg = r | g
-		uint32x4_t rg = vorrq_u32(r, g);
-		
-		//Accumulate rg, b
-		
-		//b = b >> 3 ie convert to smaller int
-		b = vshrq_n_u32(b, 3);
-		
-		uint32x4_t rgb = vorrq_u32(rg, b);
-		
-		//Select the low 16 bits of each 32-bit int
-		uint16x4_t rgb16 = vmovn_u32(rgb);
-		
-		//Now write back to memory
-		vst1_u16(outPixel16, rgb16);
-#else 
-		
+		//Compose first 4 into 4 32-bit ints
+		//compose red by widening shift left by 11
+#if 0 //WTF doesn't this work??
+		uint16x8_t r5_g6_b5 = vshll_n_u8(r, 11);
+		r5_g6_b5 += vshll_n_u8(g, 5);
+		r5_g6_b5 += vshll_n_u8(b, 0);
+#else
+		uint16x8_t r5_g6_b5 = vmovl_u8(b);
+		//Widen r
+		uint16x8_t r16 = vmovl_u8(r);
+		//Left shift into position within 16-bit int
+		r16 = vshlq_n_u16(r16, 11);
+		r5_g6_b5 |= r16;
+
+		//Widen g
+		uint16x8_t g16 = vmovl_u8(g);
+		//Left shift into position within 16-bit int
+		g16 = vshlq_n_u16(g16, 5);
+
+		r5_g6_b5 |= g16;
 #endif
 		
+		//Now write back to memory
+		vst1q_u16(outPixel16, r5_g6_b5);		
 	}
 	//Do the end on normal flt hardware
 	for(; i < pixelCount; ++i, ++inPixel32) {
