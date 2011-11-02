@@ -19,6 +19,8 @@
 		4910A2A714412ED00088CD7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4910A2A514412ED00088CD7E /* InfoPlist.strings */; };
 		4910A2AA14412ED00088CD7E /* ImageConvertTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4910A2A914412ED00088CD7E /* ImageConvertTests.m */; };
 		4910A2B414412F260088CD7E /* DNImageConvert.c in Sources */ = {isa = PBXBuildFile; fileRef = 4910A2B314412F260088CD7E /* DNImageConvert.c */; };
+		49426CC4146207E80098E845 /* BGRA2RGB565.s in Sources */ = {isa = PBXBuildFile; fileRef = 49426CC3146207E80098E845 /* BGRA2RGB565.s */; };
+		49426CC614620ACC0098E845 /* BGRA2RGB565.s in Sources */ = {isa = PBXBuildFile; fileRef = 49426CC3146207E80098E845 /* BGRA2RGB565.s */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,7 @@
 		4910A2B514412F620088CD7E /* DNImageConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNImageConvert.h; sourceTree = "<group>"; };
 		491A99AC144160A100825247 /* DNTimingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNTimingMacros.h; sourceTree = "<group>"; };
 		491A99AE1441617A00825247 /* notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
+		49426CC3146207E80098E845 /* BGRA2RGB565.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = BGRA2RGB565.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,7 @@
 				4910A29414412ED00088CD7E /* ImageConvertAppDelegate.m */,
 				4910A2B514412F620088CD7E /* DNImageConvert.h */,
 				4910A2B314412F260088CD7E /* DNImageConvert.c */,
+				49426CC3146207E80098E845 /* BGRA2RGB565.s */,
 				491A99AC144160A100825247 /* DNTimingMacros.h */,
 				4910A28B14412ED00088CD7E /* Supporting Files */,
 			);
@@ -261,6 +265,7 @@
 				4910A29114412ED00088CD7E /* main.m in Sources */,
 				4910A29514412ED00088CD7E /* ImageConvertAppDelegate.m in Sources */,
 				4910A2B414412F260088CD7E /* DNImageConvert.c in Sources */,
+				49426CC4146207E80098E845 /* BGRA2RGB565.s in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4910A2AA14412ED00088CD7E /* ImageConvertTests.m in Sources */,
+				49426CC614620ACC0098E845 /* BGRA2RGB565.s in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +324,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -337,6 +344,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
