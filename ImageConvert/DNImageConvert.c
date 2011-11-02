@@ -27,7 +27,7 @@ bool DNConvert_ARGB8888toRGB565(void *src, size_t srcBufferSize, void *dst)
 	const unsigned int pixelCount = srcBufferSize / 4;
 	
 #if defined(__ARM_NEON__) && USE_NEON_IMPL
-	bgra2rgb565_neon(src, dst, pixelCount);
+	bgra2rgb565_neon(dst, src, pixelCount);
 #else
 	for(int i = 0; i < pixelCount; ++i, ++inPixel32) {
 		const unsigned int r = ((*inPixel32 >> 0 ) & 0xFF);
